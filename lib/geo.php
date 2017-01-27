@@ -118,6 +118,10 @@ class Geo {
     $first    = a::first($results, []);
     $geometry = a::get($first, 'geometry', []);
     $location = a::get($geometry, 'location', []);
+    
+    if (empty($location)) {
+      return false;
+    }
 
     return static::point([
       'lat' => str_replace(',', '.', a::get($location, 'lat')),
